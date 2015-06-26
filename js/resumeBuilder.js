@@ -17,7 +17,7 @@ var work = {
 	"jobs": [
 		{ 
 			"employer": 	"Investor Communications Network, LLC.",
-			"title": 		"Database Developer",
+			"title": 		".NET Software Developer",
 			"location": 	"New York, NY",
 			"dates": 		"March, 2015 - June, 2015",
 			"description": 	"Managed multi-tiered database applications employing the .NET 4.0 Framework, C#, Entity Framework, and SQL Server 2014.  Applications were both desktop and web based, ensuring the satisfaction of the user’s needs.  Maintained companies’ websites by updating monthly and quarterly reports for client access, modifying business logic to improve UI interaction and experience, and modernized front-end design using contemporary web technologies.  Liaison with outside IT and ISP companies to establish a productive and respectful relationship.  Other duties included troubleshooting system outages, installing new hardware components like network printers, monitors and computers, configuring firewall and router setups, and assisting colleagues with software related issues." 
@@ -42,10 +42,11 @@ var work = {
 var projects = {
 	"project": [
 		{
-			"title": "Content Management System at top financial analysis firm",
-			"dates": "November, 2013 - March, 2015",
-			"description": "Publishing system that handles authoring, permissions, workflow management and sending of final product to third party for web posting.",
-			"images": "images/EidosMedia_image.png"
+			"title": 		"Content Management System at top financial analysis firm",
+			"dates": 		"November, 2013 - March, 2015",
+			"description": 	"Publishing system that handles authoring, permissions, workflow management and sending of final product to third party for web posting.",
+			"images": 		"images/EidosMedia_image.png",
+			"display": 		"display()"
 		}
 	]
 }
@@ -116,48 +117,45 @@ if(bio.skills.length > 0)
 
 
 // Work History Section
-var formattedEmployer1 = HTMLworkEmployer.replace("%data%", work.jobs[0].employer);
-var formattedTitle1 = HTMLworkTitle.replace("%data%", work.jobs[0].title);
-var employerAndTitle1 = formattedEmployer1 + formattedTitle1;
-var formattedDates1 = HTMLprojectDates.replace("%data%",work.jobs[0].dates);
-var formattedLocation1 = HTMLworkLocation.replace("%data%",work.jobs[0].location);
-var formattedDescription1 = HTMLworkDescription.replace("%data%",work.jobs[0].description);
-$("#workExperience").append(HTMLworkStart);
-$("#workExperience").append(employerAndTitle1);
-$("#workExperience").append(formattedDates1);
-$("#workExperience").append(formattedLocation1);
-$("#workExperience").append(formattedDescription1);
+var displayWork = function()
+{
+	for(var job in work.jobs)
+	{
+		$("#workExperience").append(HTMLworkStart);
 
-
-
-
-
-var formattedEmployer2 = HTMLworkEmployer.replace("%data%", work.jobs[1].employer);
-var formattedTitle2 = HTMLworkTitle.replace("%data%", work.jobs[1].title);
-var employerAndTitle2 = formattedEmployer2 + formattedTitle2;
-var formattedDates2 = HTMLprojectDates.replace("%data%",work.jobs[1].dates);
-var formattedLocation2 = HTMLworkLocation.replace("%data%",work.jobs[1].location);
-var formattedDescription2 = HTMLworkDescription.replace("%data%",work.jobs[1].description);
-$("#workExperience").append(employerAndTitle2);
-$("#workExperience").append(formattedDates2);
-$("#workExperience").append(formattedLocation2);
-$("#workExperience").append(formattedDescription2);
-
-
-var formattedEmployer3 = HTMLworkEmployer.replace("%data%", work.jobs[2].employer);
-var formattedTitle3 = HTMLworkTitle.replace("%data%", work.jobs[2].title);
-var employerAndTitle3 = formattedEmployer3 + formattedTitle3;
-var formattedDates3 = HTMLprojectDates.replace("%data%",work.jobs[2].dates);
-var formattedLocation3 = HTMLworkLocation.replace("%data%",work.jobs[2].location);
-var formattedDescription3 = HTMLworkDescription.replace("%data%",work.jobs[2].description);
-$("#workExperience").append(employerAndTitle3);
-$("#workExperience").append(formattedDates3);
-$("#workExperience").append(formattedLocation3);
-$("#workExperience").append(formattedDescription3);
+		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+		var employerAndTitle = formattedEmployer + formattedTitle;
+		var formattedDates = HTMLprojectDates.replace("%data%",work.jobs[job].dates);
+		var formattedLocation = HTMLworkLocation.replace("%data%",work.jobs[job].location);
+		var formattedDescription = HTMLworkDescription.replace("%data%",work.jobs[job].description);
+		$(".work-entry:last").append(employerAndTitle);
+		$(".work-entry:last").append(formattedDates);
+		$(".work-entry:last").append(formattedLocation);
+		$(".work-entry:last").append(formattedDescription);
+	}
+}
+displayWork();
 
 
 // Project Section
+projects.display = function() {
+	$("#projects").append(HTMLprojectStart);
 
+	var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.project[0].title);
+	$(".project-entry:last").append(formattedProjectTitle);
+
+	var formattedProjectDates = HTMLprojectDates.replace("%data%", projects.project[0].dates);
+	$(".project-entry:last").append(formattedProjectDates);
+
+	var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.project[0].description);
+	$(".project-entry:last").append(formattedProjectDescription);
+
+	var formattedProjectImages = HTMLprojectImage.replace("%data%", projects.project[0].images);
+	$(".project-entry:last").append(formattedProjectImages);
+};
+
+projects.display();
 
 // Education Section
 var formattedSchoolName = HTMLschoolName.replace("%data%", education["schools"][0].name);
@@ -166,11 +164,11 @@ var SchoolNameAndSchoolDegree = formattedSchoolName + formattedSchoolDegree;
 var formattedSchoolDates = HTMLschoolDates.replace("%data%", education["schools"][0].dates);
 var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education["schools"][0].location);
 var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education["schools"][0].major);
-$("#education").append(HTMLschoolStart);
-$("#education").append(SchoolNameAndSchoolDegree);
-$("#education").append(formattedSchoolDates);
-$("#education").append(formattedSchoolLocation);
-$("#education").append(formattedSchoolMajor);
+$(".education-entry:last").append(HTMLschoolStart);
+$(".education-entry:last").append(SchoolNameAndSchoolDegree);
+$(".education-entry:last").append(formattedSchoolDates);
+$(".education-entry:last").append(formattedSchoolLocation);
+$(".education-entry:last").append(formattedSchoolMajor);
 
 
 var formattedOnlineCourseTitle = HTMLonlineTitle.replace("%data%", education["onlineCourses"][0].title);
@@ -178,10 +176,14 @@ var formattedOnlineCourseSchool = HTMLonlineSchool.replace("%data%", education["
 var OnlineCourseTitleAndSchool = formattedOnlineCourseTitle + formattedOnlineCourseSchool;
 var formattedOnlineCourseDates = HTMLonlineDates.replace("%data%", education["onlineCourses"][0].date);
 var formattedOnlineCourseURL = HTMLonlineURL.replace("%data%", education["onlineCourses"][0].url);
-$("#education").append(HTMLonlineClasses);
-$("#education").append(OnlineCourseTitleAndSchool);
-$("#education").append(formattedOnlineCourseDates);
-$("#education").append(formattedOnlineCourseURL);
+$(".education-entry:last").append(HTMLonlineClasses);
+$(".education-entry:last").append(OnlineCourseTitleAndSchool);
+$(".education-entry:last").append(formattedOnlineCourseDates);
+$(".education-entry:last").append(formattedOnlineCourseURL);
 
 
 // Map Section
+$("#mapDiv").append(googleMap);
+
+// Internationalize Button
+$("#main").append(internationalizeButton);
