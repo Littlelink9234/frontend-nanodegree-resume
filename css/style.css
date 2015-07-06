@@ -48,6 +48,9 @@ h2, h3, h4, h5 {
   padding-right: 5%;
 }
 
+#onlineTitle {
+  padding-left: 0px;
+}
 
 .date-text {
   font-style: italic;
